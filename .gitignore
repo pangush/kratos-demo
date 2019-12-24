@@ -14,3 +14,4 @@
 kratos-demo
 cmd/cmd
 /.idea/
+/logs/
