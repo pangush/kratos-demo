@@ -2,6 +2,9 @@ package main
 
 import (
 	"flag"
+	"github.com/bilibili/kratos/pkg/conf/env"
+	"github.com/bilibili/kratos/pkg/naming/etcd"
+	"github.com/bilibili/kratos/pkg/net/rpc/warden/resolver"
 	"kratos-demo/internal/conf"
 	"os"
 	"os/signal"
@@ -13,6 +16,9 @@ import (
 )
 
 func main() {
+	// AppID your appid, ensure unique.
+	env.AppID = "demo.service"
+
 	flag.Parse()
 
 	//paladin.Init()
@@ -20,6 +26,9 @@ func main() {
 
 	log.Init(conf.Conf.Log) // debug flag: log.dir={path}
 	defer log.Close()
+
+	// NOTE: 注意这段代码，表示要使用etcd进行服务发现
+	resolver.Register(etcd.Builder(conf.Conf.Etcd))
 
 	log.Info("kratos-demo start")
 

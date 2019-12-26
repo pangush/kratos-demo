@@ -5,15 +5,16 @@ import (
 
 	pb "kratos-demo/api"
 	"kratos-demo/internal/model"
+	"kratos-demo/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
 )
 
-var svc pb.DemoServer
+var svc *service.Service
 
 // New new a bm server.
-func New(s pb.DemoServer) (engine *bm.Engine, err error) {
+func New(s *service.Service) (engine *bm.Engine, err error) {
 	var (
 		hc struct {
 			Server *bm.ServerConfig
@@ -38,6 +39,7 @@ func initRouter(e *bm.Engine) {
 	g := e.Group("/kratos-demo")
 	{
 		g.GET("/start", howToStart)
+		g.GET("/demo", demo)
 	}
 }
 
@@ -54,4 +56,8 @@ func howToStart(c *bm.Context) {
 		Hello: "Golang 大法好 !!!",
 	}
 	c.JSON(k, nil)
+}
+
+func demo(c *bm.Context)  {
+	c.JSON(svc.Demo(), nil)
 }

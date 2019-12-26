@@ -6,6 +6,7 @@ import (
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
+	"go.etcd.io/etcd/clientv3"
 )
 
 var (
@@ -18,6 +19,7 @@ type Config struct {
 	Server *bm.ServerConfig
 	Client *redis.Config
 	Remote *Remote
+	Etcd *clientv3.Config
 }
 
 type Remote struct {
@@ -64,6 +66,13 @@ func Init() error {
 //}
 
 func local() (err error) {
+	if err := paladin.Get("etcd.toml").UnmarshalTOML(&Conf); err != nil {
+		// 不存在时，将会为nil使用默认配置
+		if err != paladin.ErrNotExist {
+			panic(err)
+		}
+	}
+
 	if err := paladin.Get("redis.toml").UnmarshalTOML(&Conf); err != nil {
 		// 不存在时，将会为nil使用默认配置
 		if err != paladin.ErrNotExist {
