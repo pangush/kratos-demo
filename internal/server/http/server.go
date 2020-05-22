@@ -1,11 +1,13 @@
 package http
 
 import (
+	"fmt"
 	"net/http"
 
 	pb "kratos-demo/api"
 	"kratos-demo/internal/model"
 	"kratos-demo/internal/service"
+
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
@@ -31,16 +33,9 @@ func New(s *service.Service) (engine *bm.Engine, err error) {
 	pb.RegisterDemoBMServer(engine, s)
 	initRouter(engine)
 	err = engine.Start()
-	return
-}
 
-func initRouter(e *bm.Engine) {
-	e.Ping(ping)
-	g := e.Group("/kratos-demo")
-	{
-		g.GET("/start", howToStart)
-		g.GET("/demo", demo)
-	}
+	fmt.Printf("%+v", engine)
+	return
 }
 
 func ping(ctx *bm.Context) {
@@ -58,6 +53,8 @@ func howToStart(c *bm.Context) {
 	c.JSON(k, nil)
 }
 
-func demo(c *bm.Context)  {
-	c.JSON(svc.Demo(), nil)
+func demo(c *bm.Context) {
+
+	err := svc.Demo(c.Context)
+	c.JSON(nil, err)
 }

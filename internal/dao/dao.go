@@ -2,9 +2,11 @@ package dao
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"kratos-demo/internal/model"
+
 	"github.com/bilibili/kratos/pkg/cache/memcache"
 	"github.com/bilibili/kratos/pkg/cache/redis"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
@@ -24,26 +26,26 @@ type Dao interface {
 
 // dao dao.
 type dao struct {
-	db          *sql.DB
-	redis       *redis.Redis
-	mc          *memcache.Memcache
-	cache *fanout.Fanout
+	db         *sql.DB
+	redis      *redis.Redis
+	mc         *memcache.Memcache
+	cache      *fanout.Fanout
 	demoExpire int32
 }
 
 // New new a dao and return.
 func New(r *redis.Redis, mc *memcache.Memcache, db *sql.DB) (d Dao, err error) {
-	var cfg struct{
+	var cfg struct {
 		DemoExpire xtime.Duration
 	}
 	if err = paladin.Get("application.toml").UnmarshalTOML(&cfg); err != nil {
 		return
 	}
 	d = &dao{
-		db: db,
-		redis: r,
-		mc: mc,
-		cache: fanout.New("cache"),
+		db:         db,
+		redis:      r,
+		mc:         mc,
+		cache:      fanout.New("cache"),
 		demoExpire: int32(time.Duration(cfg.DemoExpire) / time.Second),
 	}
 	return
@@ -59,5 +61,9 @@ func (d *dao) Close() {
 
 // Ping ping the resource.
 func (d *dao) Ping(ctx context.Context) (err error) {
+	_, err = redis.Bool(d.redis.Do(ctx, "ping"))
+	if err != nil {
+		fmt.Println(err)
+	}
 	return nil
 }

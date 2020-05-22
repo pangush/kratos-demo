@@ -16,7 +16,7 @@ func NewRedis() (r *redis.Redis, err error) {
 	//	return
 	//}
 	//r = redis.NewRedis(cfg.Client)
-	r = redis.NewRedis(conf.Conf.Client)
+	r = redis.NewRedis(conf.Conf.Redis)
 	return
 }
 
