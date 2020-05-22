@@ -15,3 +15,5 @@ kratos-demo
 cmd/cmd
 /.idea/
 /logs/
+/.history/
+/.vscode/
