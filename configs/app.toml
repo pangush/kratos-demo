@@ -1,0 +1,4 @@
+[app]
+    appName = "kratos-demo"
+    appCode = 10000
+    corsDomains = "kratos-demo.com,kratos-demo1.com"

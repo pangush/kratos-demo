@@ -3,12 +3,17 @@ module kratos-demo
 go 1.12
 
 require (
-	github.com/BurntSushi/toml v0.3.1
 	github.com/bilibili/kratos v0.3.1
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/go-redis/redis v6.15.7+incompatible
+	github.com/go-redsync/redsync v1.4.2
 	github.com/gogo/protobuf v1.3.0
 	github.com/golang/protobuf v1.3.2
+	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/google/wire v0.3.0
-	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/prometheus/common v0.6.0
+	github.com/stretchr/testify v1.4.0
+	github.com/tidwall/buntdb v1.1.2
 	go.etcd.io/etcd v0.0.0-20190917205325-a14579fbfb1a
 	google.golang.org/genproto v0.0.0-20191009194640-548a555dbc03
 	google.golang.org/grpc v1.24.0
@@ -16,6 +21,7 @@ require (
 
 replace (
 	cloud.google.com/go => github.com/googleapis/google-cloud-go v0.39.0
+	github.com/pangush/kratosplugins => D:\goproject\pangush\kratosplugins
 	golang.org/x/crypto => github.com/golang/crypto v0.0.0-20180820150726-614d502a4dac
 	golang.org/x/exp => github.com/golang/exp v0.0.0-20190627132806-fd42eb6b336f
 	golang.org/x/image => github.com/golang/image v0.0.0-20190703141733-d6a02ce849c9

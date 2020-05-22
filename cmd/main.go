@@ -2,27 +2,33 @@ package main
 
 import (
 	"flag"
-	"github.com/bilibili/kratos/pkg/conf/env"
-	"github.com/bilibili/kratos/pkg/naming/etcd"
-	"github.com/bilibili/kratos/pkg/net/rpc/warden/resolver"
 	"kratos-demo/internal/conf"
+	"kratos-demo/internal/errcode"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 
-	"github.com/bilibili/kratos/pkg/log"
+	"github.com/bilibili/kratos/pkg/conf/env"
+	"github.com/bilibili/kratos/pkg/naming/etcd"
+	"github.com/bilibili/kratos/pkg/net/rpc/warden/resolver"
+
 	"kratos-demo/internal/di"
+
+	"github.com/bilibili/kratos/pkg/log"
 )
 
 func main() {
 	// AppID your appid, ensure unique.
-	env.AppID = "demo.service"
+	env.AppID = "kratos-demo.service"
 
 	flag.Parse()
 
 	//paladin.Init()
 	conf.Init()
+
+	//errcode 注册
+	errcode.Register()
 
 	log.Init(conf.Conf.Log) // debug flag: log.dir={path}
 	defer log.Close()
