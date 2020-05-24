@@ -21,7 +21,6 @@ require (
 
 replace (
 	cloud.google.com/go => github.com/googleapis/google-cloud-go v0.39.0
-	github.com/pangush/kratosplugins => D:\goproject\pangush\kratosplugins
 	golang.org/x/crypto => github.com/golang/crypto v0.0.0-20180820150726-614d502a4dac
 	golang.org/x/exp => github.com/golang/exp v0.0.0-20190627132806-fd42eb6b336f
 	golang.org/x/image => github.com/golang/image v0.0.0-20190703141733-d6a02ce849c9
