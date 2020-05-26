@@ -5,15 +5,12 @@ go 1.12
 require (
 	github.com/bilibili/kratos v0.3.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/go-redis/redis v6.15.7+incompatible
 	github.com/go-redsync/redsync v1.4.2
 	github.com/gogo/protobuf v1.3.0
 	github.com/golang/protobuf v1.3.2
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/google/wire v0.3.0
-	github.com/prometheus/common v0.6.0
 	github.com/stretchr/testify v1.4.0
-	github.com/tidwall/buntdb v1.1.2
 	go.etcd.io/etcd v0.0.0-20190917205325-a14579fbfb1a
 	google.golang.org/genproto v0.0.0-20191009194640-548a555dbc03
 	google.golang.org/grpc v1.24.0

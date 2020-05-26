@@ -37,8 +37,11 @@ func initRouter(e *bm.Engine) {
 func api(api *bm.RouterGroup) {
 	api.GET("/start", howToStart)
 	api.GET("/demo", demo)
+
 }
 
 func apiWithoutAuth(api *bm.RouterGroup) {
 	api.GET("/auth/login", authLogin)
+	api.GET("/test/jsonwithpage", testJSONWithPage)
+	api.GET("/test/json", testJson)
 }
